@@ -23,7 +23,7 @@ jobs:
 
     - name: Build Windows Executable
       run: |
-        nativefier --name "Luxora" "https://luxoraevhub.world" --platform "windows" --arch "x64" --single-instance --disable-dev-tools build_app
+        nativefier --name "Luxora" "https://luxoraevhub.world" --platform "windows" --arch "x64" --icon "icon.ico" --single-instance --disable-dev-tools build_app
 
     - name: Upload Executable Artifact
       uses: actions/upload-artifact@v3
