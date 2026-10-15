@@ -1,0 +1,32 @@
+name: Build Luxora Windows App
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2019
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '12'
+
+    - name: Install Nativefier
+      run: npm install -g nativefier@45.0.0
+
+    - name: Build Windows Executable
+      run: |
+        nativefier --name "Luxora" "https://luxoraevhub.world" --platform "windows" --arch "x64" --single-instance --disable-dev-tools build_app
+
+    - name: Upload Executable Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Luxora-Windows-App
+        path: build_app/
